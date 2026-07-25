@@ -205,29 +205,8 @@ function App() {
             />
           </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8">
-            <div className="group relative">
-              <button className="flex items-center gap-1 text-sm font-medium hover:text-gold-light transition-colors py-2 cursor-pointer">
-                Christmas <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
-              </button>
-              <div className="absolute top-full left-0 hidden group-hover:block bg-[#4b0983] border border-gold-primary/20 rounded-md p-4 min-w-[160px] shadow-xl animate-fade-in">
-                <a href="#experience" className="block py-2 text-sm hover:text-gold-light transition-colors">The Grotto</a>
-                <a href="#prizes" className="block py-2 text-sm hover:text-gold-light transition-colors">Secret Santa</a>
-              </div>
-            </div>
-            <div className="group relative">
-              <button className="flex items-center gap-1 text-sm font-medium hover:text-gold-light transition-colors py-2 cursor-pointer">
-                Dopamint <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
-              </button>
-              <div className="absolute top-full left-0 hidden group-hover:block bg-[#4b0983] border border-gold-primary/20 rounded-md p-4 min-w-[160px] shadow-xl animate-fade-in">
-                <a href="#" className="block py-2 text-sm hover:text-gold-light transition-colors">AI Voice Tech</a>
-                <a href="#" className="block py-2 text-sm hover:text-gold-light transition-colors">Privacy Shield</a>
-              </div>
-            </div>
-            <a href="#features" className="text-sm font-medium hover:text-gold-light transition-colors">About</a>
-            <a href="#footer" className="text-sm font-medium hover:text-gold-light transition-colors">FAQ</a>
-          </nav>
+          {/* Desktop Navigation Links (Removed) */}
+          <div className="hidden md:flex flex-grow" />
 
           {/* Sign In Button with Metallic Gold Gradient */}
           <div className="hidden md:block">
@@ -266,37 +245,6 @@ function App() {
               <X size={24} />
             </button>
           </div>
-
-          <nav className="flex flex-col gap-6 text-xl font-medium mb-8">
-            <a
-              href="#experience"
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-gold-primary transition-colors border-b border-gold-primary/10 pb-3"
-            >
-              Christmas Experience
-            </a>
-            <a
-              href="#prizes"
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-gold-primary transition-colors border-b border-gold-primary/10 pb-3"
-            >
-              Dopamint AI Technology
-            </a>
-            <a
-              href="#features"
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-gold-primary transition-colors border-b border-gold-primary/10 pb-3"
-            >
-              About Campaign
-            </a>
-            <a
-              href="#footer"
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-gold-primary transition-colors border-b border-gold-primary/10 pb-3"
-            >
-              FAQ
-            </a>
-          </nav>
 
           <button
             onClick={navigateToLogin}
@@ -357,7 +305,7 @@ function App() {
                   Have a conversation with Santa
                 </button>
 
-                {/* Green Check Badge & Powered by DopaMint matching reference image */}
+                {/* Green Check Badge matching reference image */}
                 <div className="flex items-start gap-2.5 mt-2">
                   <div className="w-5 h-5 rounded-full bg-green-check flex items-center justify-center text-white shrink-0 mt-0.5 shadow-sm">
                     <Check size={12} strokeWidth={3.5} />
@@ -365,9 +313,6 @@ function App() {
                   <div className="flex flex-col text-left">
                     <span className="text-xs sm:text-sm font-bold text-white tracking-wide drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
                       Cadbury Christmas Secret Santa
-                    </span>
-                    <span className="text-[11px] sm:text-xs text-cream-text/85 font-medium drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                      Powered by DopaMint
                     </span>
                   </div>
                 </div>
@@ -601,23 +546,12 @@ function App() {
               <p className="text-xs text-cream-text/60 leading-relaxed">
                 Talk to Santa is a Cadbury Christmas campaign experience. Every conversation is generated live by Dopamint and is intended for festive fun — not real gift ordering, purchases, or personal advice. The Cadbury Secret Santa gift selection has its own full terms.
               </p>
-              <div className="flex flex-wrap gap-4 text-xs text-gold-primary/80 mt-2">
-                <a href="#" className="hover:text-gold-light transition-colors">Privacy Policy</a>
-                <span>•</span>
-                <a href="#" className="hover:text-gold-light transition-colors">Terms of Use</a>
-                <span>•</span>
-                <a href="#" className="hover:text-gold-light transition-colors">Campaign Rules</a>
-                <span>•</span>
-                <a href="#" className="hover:text-gold-light transition-colors">Cookie Settings</a>
-              </div>
             </div>
 
             {/* Footer Right Column Partners / Socials */}
             <div className="lg:col-span-3 flex flex-col items-start lg:items-end gap-6">
               <div className="flex items-center gap-3 text-xs tracking-wider">
                 <span className="text-white-soft font-semibold">Cadbury</span>
-                <span className="text-gold-primary">•</span>
-                <span className="text-gold-primary font-semibold">Dopamint</span>
               </div>
 
               {/* Social Icons */}

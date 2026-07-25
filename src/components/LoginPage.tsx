@@ -183,23 +183,12 @@ export function LoginPage({ onBackToHome, onLoginSuccess }: LoginPageProps) {
               <p className="text-xs text-cream-text/60 leading-relaxed">
                 Talk to Santa is a Cadbury Christmas campaign experience. Every conversation is generated live by Dopamint and is intended for festive fun — not real gift ordering, purchases, or personal advice.
               </p>
-              <div className="flex flex-wrap gap-4 text-xs text-gold-primary/80 mt-1">
-                <a href="#" className="hover:text-gold-light transition-colors">Privacy Policy</a>
-                <span>•</span>
-                <a href="#" className="hover:text-gold-light transition-colors">Terms of Use</a>
-                <span>•</span>
-                <a href="#" className="hover:text-gold-light transition-colors">Campaign Rules</a>
-                <span>•</span>
-                <a href="#" className="hover:text-gold-light transition-colors">Cookie Settings</a>
-              </div>
             </div>
 
             {/* Footer Right Column Partners / Socials */}
             <div className="lg:col-span-3 flex flex-col items-start lg:items-end gap-4">
               <div className="flex items-center gap-3 text-xs tracking-wider">
                 <span className="text-white-soft font-semibold">Cadbury</span>
-                <span className="text-gold-primary">•</span>
-                <span className="text-gold-primary font-semibold">Dopamint</span>
               </div>
 
               {/* Social Icons */}
