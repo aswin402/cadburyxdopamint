@@ -141,6 +141,14 @@ function App() {
   const [userName, setUserName] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileTicketState, setMobileTicketState] = useState(1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMobileTicketState((prev) => (prev === 1 ? 2 : 1));
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -503,7 +511,9 @@ function App() {
               <img
                 src={ticket1Img}
                 alt="Cadbury Secret Santa Ticket"
-                className="absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ease-in-out opacity-0 group-hover:opacity-100 select-none pointer-events-none"
+                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ease-in-out select-none pointer-events-none lg:opacity-0 lg:group-hover:opacity-100 ${
+                  mobileTicketState === 1 ? "opacity-100" : "opacity-0"
+                }`}
               />
             </div>
           </div>
