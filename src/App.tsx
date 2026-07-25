@@ -4,6 +4,7 @@ import { LoginPage } from "./components/LoginPage";
 
 // Import custom assets
 import bannerImage from "./assets/Banner_Image.png";
+import mobileBannerImage from "./assets/Mobile_Banner_JPEG.jpg";
 import secretSantaImg from "./assets/Secret_santa.png";
 import logoCad from "./assets/logocad.svg";
 
@@ -308,11 +309,17 @@ function App() {
 
       {/* Hero Section */}
       <section className="relative w-full overflow-hidden bg-transparent">
-        {/* Render the full banner image directly so its aspect ratio is 100% preserved, top to bottom! */}
+        {/* Desktop Banner Image (Visible on md screens and up) */}
         <img
           src={bannerImage}
           alt="Cadbury Secret Santa Hero Banner"
-          className="w-full h-auto block select-none pointer-events-none"
+          className="hidden md:block w-full h-auto select-none pointer-events-none"
+        />
+        {/* Mobile Banner Image (Visible on mobile screens < md) */}
+        <img
+          src={mobileBannerImage}
+          alt="Cadbury Secret Santa Hero Mobile Banner"
+          className="block md:hidden w-full h-auto select-none pointer-events-none"
         />
 
         {/* Content Overlaid on top of the image */}
