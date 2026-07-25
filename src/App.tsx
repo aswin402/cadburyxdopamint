@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, Check } from "lucide-react";
+import { Menu, X, Check } from "lucide-react";
 import { LoginPage } from "./components/LoginPage";
 
 // Import custom assets
@@ -7,13 +7,6 @@ import bannerImage from "./assets/Banner_Image.png";
 import mobileBannerImage from "./assets/Mobile_Banner_JPEG.jpg";
 import secretSantaImg from "./assets/Secret_santa.png";
 import logoCad from "./assets/logocad.svg";
-
-// Section 2 custom assets
-import santaCapImg from "./assets/santacap.png";
-import bgForSectionImg from "./assets/bgforsection.png";
-import cad1Img from "./assets/cad1.png";
-import cad2Img from "./assets/cad2.png";
-import bgTextureImg from "./assets/Background_Texture.jpg";
 
 // Prize Ticket custom assets
 import ticket1Img from "./assets/Ticket_1_L.png";
@@ -171,9 +164,7 @@ function App() {
 
   // Section Refs for scroll reveals
   const [heroTextRef, heroTextVisible] = useIntersectionObserver();
-  const [stepsRef, stepsVisible] = useIntersectionObserver();
   const [bannerRef, bannerVisible] = useIntersectionObserver();
-  const [featuresRef, featuresVisible] = useIntersectionObserver();
 
   // If on login page, render the LoginPage component
   if (currentPage === "login") {
