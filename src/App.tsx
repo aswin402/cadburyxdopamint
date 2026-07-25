@@ -392,7 +392,7 @@ function App() {
         <div className="container max-w-6xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           <div className="lg:col-span-7 flex flex-col justify-center items-center w-full">
-            <div className="relative flex flex-col gap-12 sm:gap-16 md:gap-20 w-full max-w-xl h-[400px] sm:h-[520px] md:h-[600px] lg:h-[680px] justify-between">
+            <div className="relative flex flex-col gap-8 sm:gap-12 lg:gap-0 w-full max-w-xl h-auto lg:h-[680px] lg:justify-between">
               {/* SVG Winding Dashed Road Path - Exactly matching badge column */}
               <div className="absolute left-0 top-10 bottom-10 w-20 sm:w-28 pointer-events-none z-0">
                 <svg className="w-full h-full" viewBox="0 0 100 800" fill="none" preserveAspectRatio="none">
