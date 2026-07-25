@@ -517,7 +517,7 @@ function App() {
             <img
               src={mobileScreenImg}
               alt="Secret Santa Mobile Chat Experience"
-              className="h-[400px] sm:h-[520px] md:h-[600px] lg:h-[680px] w-auto object-contain drop-shadow-2xl select-none pointer-events-none hover:scale-[1.02] transition-transform duration-500"
+              className="w-full max-w-[92%] sm:max-w-[450px] lg:max-w-none h-auto lg:h-[680px] lg:w-auto object-contain drop-shadow-2xl select-none pointer-events-none hover:scale-[1.02] transition-transform duration-500"
             />
           </div>
 
