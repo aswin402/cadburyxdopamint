@@ -261,12 +261,16 @@ function App() {
           src={bannerImage}
           alt="Cadbury Secret Santa Hero Banner"
           className="hidden md:block w-full h-auto select-none pointer-events-none"
+          fetchPriority="high"
+          loading="eager"
         />
         {/* Mobile Banner Image (Visible on mobile screens < md) */}
         <img
           src={mobileBannerImage}
           alt="Cadbury Secret Santa Hero Mobile Banner"
           className="block md:hidden w-full h-auto select-none pointer-events-none"
+          fetchPriority="high"
+          loading="eager"
         />
 
         {/* Content Overlaid on top of the image */}
@@ -283,6 +287,8 @@ function App() {
                 src={secretSantaImg}
                 alt="Secret Santa"
                 className="w-[70%] sm:w-[80%] md:w-[85%] lg:w-full max-w-[420px] object-contain hover:scale-102 transition-transform duration-500 mb-2 sm:mb-3 md:mb-4 select-none"
+                fetchPriority="high"
+                loading="eager"
               />
 
               {/* Sub-tagline */}
@@ -357,6 +363,7 @@ function App() {
                     src={keyImg}
                     alt="Sign In Badge"
                     className="w-[95%] h-[95%] object-contain select-none pointer-events-none"
+                    loading="lazy"
                   />
                 </div>
 
@@ -379,6 +386,7 @@ function App() {
                       src={santaRidingImg}
                       alt="Santa Riding Sleigh"
                       className="w-full h-auto object-contain filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.08)]"
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -392,6 +400,7 @@ function App() {
                     src={chatImg}
                     alt="Make a Wish Badge"
                     className="w-[115%] h-[115%] object-contain select-none pointer-events-none"
+                    loading="lazy"
                   />
                 </div>
 
@@ -414,6 +423,7 @@ function App() {
                       src={chiminiImg}
                       alt="Chimney decoration"
                       className="w-full h-auto object-contain filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.08)]"
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -427,6 +437,7 @@ function App() {
                     src={codeImg}
                     alt="Get Code Badge"
                     className="w-[115%] h-[115%] object-contain select-none pointer-events-none"
+                    loading="lazy"
                   />
                 </div>
 
@@ -449,6 +460,7 @@ function App() {
                       src={giftImg}
                       alt="Purple Gift box"
                       className="w-full h-auto object-contain filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.08)]"
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -462,6 +474,7 @@ function App() {
               src={mobileScreenImg}
               alt="Secret Santa Mobile Chat Experience"
               className="w-full max-w-[92%] sm:max-w-[450px] lg:max-w-none h-auto lg:h-[680px] lg:w-auto object-contain drop-shadow-2xl select-none pointer-events-none hover:scale-[1.02] transition-transform duration-500"
+              loading="lazy"
             />
           </div>
 
@@ -505,6 +518,7 @@ function App() {
                 src={ticket2Img}
                 alt="Cadbury Secret Santa Golden Ticket"
                 className="w-full h-full block object-contain select-none"
+                loading="lazy"
               />
 
               {/* Hover Ticket 1 Image (Standard Ticket) - Transitions on top of default image */}
@@ -514,6 +528,7 @@ function App() {
                 className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ease-in-out select-none pointer-events-none lg:opacity-0 lg:group-hover:opacity-100 ${
                   mobileTicketState === 1 ? "opacity-100" : "opacity-0"
                 }`}
+                loading="lazy"
               />
             </div>
           </div>
@@ -527,6 +542,7 @@ function App() {
           src={aboveFooterImg}
           alt="Cadbury Christmas Campaign Banner"
           className="w-full h-auto block select-none"
+          loading="lazy"
         />
       </section>
 
