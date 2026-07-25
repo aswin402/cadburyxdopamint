@@ -542,72 +542,10 @@ function App() {
             </div>
 
             {/* Footer Center Column Legal */}
-            <div className="lg:col-span-6 flex flex-col gap-3">
+            <div className="lg:col-span-9 flex flex-col gap-3">
               <p className="text-xs text-cream-text/60 leading-relaxed">
                 Talk to Santa is a Cadbury Christmas campaign experience. Every conversation is generated live by Dopamint and is intended for festive fun — not real gift ordering, purchases, or personal advice. The Cadbury Secret Santa gift selection has its own full terms.
               </p>
-            </div>
-
-            {/* Footer Right Column Partners / Socials */}
-            <div className="lg:col-span-3 flex flex-col items-start lg:items-end gap-6">
-              <div className="flex items-center gap-3 text-xs tracking-wider">
-                <span className="text-white-soft font-semibold">Cadbury</span>
-              </div>
-
-              {/* Social Icons */}
-              <div className="flex items-center gap-4">
-                {/* Instagram */}
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-gold-primary/20 hover:border-gold-primary text-gold-primary hover:text-gold-light flex items-center justify-center transition-all hover:scale-110 cursor-pointer"
-                  aria-label="Instagram"
-                >
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                  </svg>
-                </a>
-                {/* Twitter / X */}
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-gold-primary/20 hover:border-gold-primary text-gold-primary hover:text-gold-light flex items-center justify-center transition-all hover:scale-110 cursor-pointer"
-                  aria-label="Twitter"
-                >
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
-                  </svg>
-                </a>
-                {/* YouTube */}
-                <a
-                  href="https://youtube.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-gold-primary/20 hover:border-gold-primary text-gold-primary hover:text-gold-light flex items-center justify-center transition-all hover:scale-110 cursor-pointer"
-                  aria-label="Youtube"
-                >
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-                  </svg>
-                </a>
-                {/* TikTok */}
-                <a
-                  href="https://tiktok.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-gold-primary/20 hover:border-gold-primary text-gold-primary hover:text-gold-light flex items-center justify-center transition-all hover:scale-110 cursor-pointer"
-                  aria-label="TikTok"
-                >
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
-                  </svg>
-                </a>
-              </div>
             </div>
           </div>
         </div>
