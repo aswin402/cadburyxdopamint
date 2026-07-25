@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-purple-deep: #4b0983;
+  --color-purple-brand: #3B1A6E;
+  --color-purple-mid: #5B2D8E;
+  --color-purple-light: #7B4AAF;
+  --color-purple-soft: #9B6FCF;
+
+  --color-gold-primary: #C9A84C;
+  --color-gold-light: #E2C97C;
+  --color-gold-dark: #A08030;
+  --color-gold-shimmer: #F5E6A3;
+
+  --color-cream-bg: #F5EFE6;
+  --color-cream-light: #FBF7F0;
+  --color-cream-text: #F0E8D8;
+  --color-white-soft: #FFFDF8;
+
+  --color-green-check: #4CAF50;
+  --color-text-dark: #2D1B4E;
+  --color-text-muted: #6B5A7E;
+
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-sparkle: sparkle 3s ease-in-out infinite;
+  --animate-shimmer: shimmer 4s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes sparkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+}
+
+/* User Spec Soft Metallic Gold Gradient Button Styles */
+.bg-metallic-gold {
+  background: linear-gradient(90deg, #F8E2AA 0%, #FFF3CE 20%, #E6CE8A 45%, #D4AF57 70%, #E7C97B 88%, #F7E4AD 100%);
+  background-size: 200% 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.bg-metallic-gold:hover {
+  background-position: 100% 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #4b0983;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A84C;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E2C97C;
+}
+
+/* Custom utility styles */
+.text-italic-purple {
+  font-style: italic;
+  color: #C199FF;
+}
+
+.gold-gradient-border {
+  border-image: linear-gradient(to bottom, #E2C97C, #A08030) 1;
+}
+
+.gold-text-glow {
+  /* Glow removed per user request */
+}
