@@ -192,12 +192,14 @@ function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative w-full overflow-hidden bg-transparent">
+      <section className="relative w-full overflow-hidden bg-transparent aspect-[1080/2218] md:aspect-[1920/1338]">
         {/* Desktop Banner Image (Visible on md screens and up) */}
         <img
           src={bannerImage}
           alt="Cadbury Secret Santa Hero Banner"
           className="hidden md:block w-full h-auto select-none pointer-events-none"
+          width={1920}
+          height={1338}
           fetchPriority="high"
           loading="eager"
         />
@@ -206,6 +208,8 @@ function App() {
           src={mobileBannerImage}
           alt="Cadbury Secret Santa Hero Mobile Banner"
           className="block md:hidden w-full h-auto select-none pointer-events-none"
+          width={1080}
+          height={2218}
           fetchPriority="high"
           loading="eager"
         />
@@ -465,6 +469,8 @@ function App() {
           src={aboveFooterImg}
           alt="Cadbury Christmas Campaign Banner"
           className="w-full h-auto block select-none"
+          width={1920}
+          height={882}
           loading="lazy"
         />
       </section>
