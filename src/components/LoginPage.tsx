@@ -49,7 +49,7 @@ export function LoginPage({ onBackToHome, onLoginSuccess }: LoginPageProps) {
         {/* Header Text */}
         <div className="text-center max-w-xl mx-auto mb-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white mb-3 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
-            Welcome back, <br />
+            Welcome, <br />
             <span className="text-gold-light">Santa's ready to chat.</span>
           </h1>
           <p className="text-cream-text/85 text-xs sm:text-sm md:text-base leading-relaxed">
