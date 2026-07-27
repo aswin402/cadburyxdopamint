@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { LoginPage } from "./components/LoginPage";
+import { MeetSantaPage } from "./components/MeetSantaPage";
 
 // Import custom assets
 import bannerImage from "./assets/Banner_Image.webp";
@@ -109,7 +110,7 @@ function SparkleCanvas() {
 }
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<"home" | "login">("home");
+  const [currentPage, setCurrentPage] = useState<"home" | "login" | "meet-santa">("home");
   const [userName, setUserName] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileTicketState, setMobileTicketState] = useState(1);
@@ -139,7 +140,20 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const navigateToMeetSanta = () => {
+    setCurrentPage("meet-santa");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
+  // If on meet-santa page, render the MeetSantaPage component
+  if (currentPage === "meet-santa") {
+    return (
+      <MeetSantaPage
+        userName={userName}
+        onEndCall={navigateToHome}
+      />
+    );
+  }
 
   // If on login page, render the LoginPage component
   if (currentPage === "login") {
@@ -149,6 +163,7 @@ function App() {
         onLoginSuccess={(name) => {
           setUserName(name);
         }}
+        onNavigateToMeetSanta={navigateToMeetSanta}
       />
     );
   }
