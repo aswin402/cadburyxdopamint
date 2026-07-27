@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, Check } from "lucide-react";
 import { LoginPage } from "./components/LoginPage";
 
 // Import custom assets
@@ -139,7 +138,6 @@ function SparkleCanvas() {
 function App() {
   const [currentPage, setCurrentPage] = useState<"home" | "login">("home");
   const [userName, setUserName] = useState<string | null>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileTicketState, setMobileTicketState] = useState(1);
 
@@ -160,13 +158,11 @@ function App() {
 
   const navigateToLogin = () => {
     setCurrentPage("login");
-    setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const navigateToHome = () => {
     setCurrentPage("home");
-    setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -203,56 +199,8 @@ function App() {
               className="h-10 md:h-12 w-auto object-contain hover:scale-105 transition-transform cursor-pointer select-none" 
             />
           </div>
-
-          {/* Desktop Navigation Links (Removed) */}
-          <div className="hidden md:flex flex-grow" />
-
-          {/* Sign In Button with Metallic Gold Gradient */}
-          <div className="hidden md:block">
-            <button
-              onClick={navigateToLogin}
-              className="px-6 py-2 bg-metallic-gold text-[#4b0983] font-bold rounded-full border border-[#FFE9A0]/50 hover:scale-105 transition-all cursor-pointer shadow-md"
-            >
-              {userName ? `Hi, ${userName}` : "Sign in"}
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden p-2 text-gold-light hover:text-gold-primary transition-colors cursor-pointer"
-            aria-label="Toggle menu"
-          >
-            <Menu size={24} />
-          </button>
         </div>
       </header>
-
-      {/* Mobile Drawer Navigation */}
-      <div
-        className={`fixed inset-0 z-50 bg-[#4b0983] backdrop-blur-lg transform transition-transform duration-300 md:hidden ${
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex flex-col h-full p-6">
-          <div className="flex items-center justify-between mb-8">
-            <img src={logoCad} alt="Cadbury Logo" className="h-8 w-auto object-contain" />
-            <button
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2 text-gold-light hover:text-gold-primary transition-colors cursor-pointer"
-            >
-              <X size={24} />
-            </button>
-          </div>
-
-          <button
-            onClick={navigateToLogin}
-            className="w-full py-3 bg-metallic-gold text-[#4b0983] font-bold rounded-full border border-[#FFE9A0]/50 mt-auto cursor-pointer shadow-md"
-          >
-            {userName ? `Hi, ${userName}` : "Sign in"}
-          </button>
-        </div>
-      </div>
 
       {/* Hero Section */}
       <section className="relative w-full overflow-hidden bg-transparent">
@@ -301,6 +249,15 @@ function App() {
                 This Christmas, don't just write to Santa, talk to him. Share your wishes and hear Santa reply in his warm, real-time voice. Better yet, he'll remember your name and continue the conversation.
               </p>
 
+              {/* Single Primary Action Button with Metallic Gold Gradient */}
+              <div className="flex flex-col items-start gap-3 w-full sm:w-auto">
+                <button
+                  onClick={navigateToLogin}
+                  className="px-5 py-3 sm:px-6 sm:py-3.5 bg-metallic-gold text-[#4b0983] font-bold rounded-xl text-xs sm:text-sm md:text-base border border-[#FFE9A0]/60 hover:scale-[1.03] active:scale-[0.98] transition-all cursor-pointer shadow-md"
+                >
+                  Have a conversation with Santa
+                </button>
+              </div>
             </div>
 
             {/* Right column empty to let Santa in his sleigh shine */}
