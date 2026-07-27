@@ -301,27 +301,6 @@ function App() {
                 This Christmas, don't just write to Santa, talk to him. Share your wishes and hear Santa reply in his warm, real-time voice. Better yet, he'll remember your name and continue the conversation.
               </p>
 
-              {/* Single Primary Action Button with Metallic Gold Gradient */}
-              <div className="flex flex-col items-start gap-3 w-full sm:w-auto">
-                <button
-                  onClick={navigateToLogin}
-                  className="px-5 py-3 sm:px-6 sm:py-3.5 bg-metallic-gold text-[#4b0983] font-bold rounded-xl text-xs sm:text-sm md:text-base border border-[#FFE9A0]/60 hover:scale-[1.03] active:scale-[0.98] transition-all cursor-pointer shadow-md"
-                >
-                  Have a conversation with Santa
-                </button>
-
-                {/* Green Check Badge matching reference image */}
-                <div className="flex items-start gap-2.5 mt-2">
-                  <div className="w-5 h-5 rounded-full bg-green-check flex items-center justify-center text-white shrink-0 mt-0.5 shadow-sm">
-                    <Check size={12} strokeWidth={3.5} />
-                  </div>
-                  <div className="flex flex-col text-left">
-                    <span className="text-xs sm:text-sm font-bold text-white tracking-wide drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                      Cadbury Christmas Secret Santa
-                    </span>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Right column empty to let Santa in his sleigh shine */}
