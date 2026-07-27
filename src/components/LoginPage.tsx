@@ -172,7 +172,7 @@ export function LoginPage({ onBackToHome, onLoginSuccess, onNavigateToMeetSanta 
             {/* Footer Center Column Legal */}
             <div className="lg:col-span-9 flex flex-col gap-2">
               <p className="text-xs text-cream-text/60 leading-relaxed">
-                Talk to Santa is a Cadbury Christmas campaign experience. Every conversation is generated live by Dopamint and is intended for festive fun — not real gift ordering, purchases, or personal advice.
+                Talk to Santa is a Cadbury Christmas campaign experience. Every conversation is generated live and is intended for festive fun — not real gift ordering, purchases, or personal advice.
               </p>
             </div>
           </div>
