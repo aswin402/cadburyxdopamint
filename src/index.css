@@ -43,17 +43,26 @@
   }
 }
 
-/* User Spec Soft Metallic Gold Gradient Button Styles */
 .bg-metallic-gold {
-  background: linear-gradient(90deg, #F8E2AA 0%, #FFF3CE 20%, #E6CE8A 45%, #D4AF57 70%, #E7C97B 88%, #F7E4AD 100%);
+  background: linear-gradient(
+    90deg,
+    #f6d98d 0%,
+    #feeaaf 20%,
+    #f1ce77 40%,
+    #d3aa57 55%,
+    #f3da98 75%,
+    #feeaaf 90%,
+    #d3aa57 100%
+  );
   background-size: 200% 100%;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background-position: 0% center;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .bg-metallic-gold:hover {
-  background-position: 100% 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-position: 100% center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Custom Scrollbar */
