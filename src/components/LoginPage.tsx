@@ -48,7 +48,7 @@ export function LoginPage({ onBackToHome, onLoginSuccess }: LoginPageProps) {
       <main className="relative z-10 container mx-auto px-4 py-8 flex flex-col items-center justify-center flex-grow max-w-4xl">
         {/* Header Text */}
         <div className="text-center max-w-xl mx-auto mb-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white mb-3 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-spartan font-bold text-white mb-3 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
             Welcome, <br />
             <span className="text-gold-light">Santa's ready to chat.</span>
           </h1>
@@ -65,7 +65,7 @@ export function LoginPage({ onBackToHome, onLoginSuccess }: LoginPageProps) {
           </div>
 
           <div className="pt-3 text-center mb-6">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-1.5">
+            <h2 className="text-2xl sm:text-3xl font-spartan font-bold text-white mb-1.5">
               Step into the grotto
             </h2>
             <p className="text-cream-text/70 text-xs sm:text-sm">

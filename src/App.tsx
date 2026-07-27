@@ -375,7 +375,7 @@ function App() {
                   </div>
                   <div className="flex-grow pr-2">
                     <span className="text-[#2B0E54]/60 font-bold text-xs uppercase tracking-wider block mb-1">Step 01</span>
-                    <h3 className="text-lg sm:text-xl font-serif font-extrabold text-[#2B0E54] mb-1.5">Sign In</h3>
+                    <h3 className="text-lg sm:text-xl font-spartan font-extrabold text-[#2B0E54] mb-1.5">Sign In</h3>
                     <p className="text-[#2B0E54]/75 text-xs sm:text-sm leading-relaxed">
                       Tell Santa your name. Takes only a few seconds.
                     </p>
@@ -412,7 +412,7 @@ function App() {
                   </div>
                   <div className="flex-grow pr-2">
                     <span className="text-[#2B0E54]/60 font-bold text-xs uppercase tracking-wider block mb-1">Step 02</span>
-                    <h3 className="text-lg sm:text-xl font-serif font-extrabold text-[#2B0E54] mb-1.5">Make a Wish</h3>
+                    <h3 className="text-lg sm:text-xl font-spartan font-extrabold text-[#2B0E54] mb-1.5">Make a Wish</h3>
                     <p className="text-[#2B0E54]/75 text-xs sm:text-sm leading-relaxed">
                       Share your Christmas wish with Santa.
                     </p>
@@ -449,7 +449,7 @@ function App() {
                   </div>
                   <div className="flex-grow pr-2">
                     <span className="text-[#2B0E54]/60 font-bold text-xs uppercase tracking-wider block mb-1">Step 03</span>
-                    <h3 className="text-lg sm:text-xl font-serif font-extrabold text-[#2B0E54] mb-1.5">Get Your Unique Code</h3>
+                    <h3 className="text-lg sm:text-xl font-spartan font-extrabold text-[#2B0E54] mb-1.5">Get Your Unique Code</h3>
                     <p className="text-[#2B0E54]/75 text-xs sm:text-sm leading-relaxed">
                       Receive your unique code from Santa.
                     </p>
