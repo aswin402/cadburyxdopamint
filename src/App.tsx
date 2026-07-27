@@ -21,33 +21,6 @@ import santaRidingImg from "./assets/santa_riding.webp";
 import chiminiImg from "./assets/chimini.webp";
 import giftImg from "./assets/gift.webp";
 
-// Hook for scroll animation reveal
-function useIntersectionObserver() {
-  const [isIntersecting, setIsIntersecting] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsIntersecting(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  return [ref, isIntersecting] as const;
-}
 
 // Sparkle Canvas Component
 function SparkleCanvas() {
@@ -166,9 +139,7 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Section Refs for scroll reveals
-  const [heroTextRef, heroTextVisible] = useIntersectionObserver();
-  const [bannerRef, bannerVisible] = useIntersectionObserver();
+
 
   // If on login page, render the LoginPage component
   if (currentPage === "login") {
@@ -224,12 +195,7 @@ function App() {
         {/* Content Overlaid on top of the image */}
         <div className="absolute inset-0 z-10 flex items-start pt-24 sm:pt-32 md:pt-40 lg:pt-48">
           <div className="container mx-auto px-4 md:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            <div
-              ref={heroTextRef as any}
-              className={`lg:col-span-5 xl:col-span-5 flex flex-col items-start transition-all duration-1000 ${
-                heroTextVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-            >
+            <div className="lg:col-span-5 xl:col-span-5 flex flex-col items-start">
               {/* Secret Santa Title Image */}
               <img
                 src={secretSantaImg}
@@ -438,10 +404,7 @@ function App() {
       <section id="prizes" className="bg-cream-bg py-6 md:py-10 text-white relative">
         <div className="container mx-auto px-4 md:px-8">
           <div
-            ref={bannerRef as any}
-            className={`relative rounded-2xl bg-[linear-gradient(135deg,_#2D1060_0%,_#4B1A8E_50%,_#3B1A6E_100%)] p-2 sm:p-3 md:p-4 overflow-hidden shadow-xl border border-gold-primary/20 transition-all duration-1000 ${
-              bannerVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-98"
-            }`}
+            className="relative rounded-2xl bg-[linear-gradient(135deg,_#2D1060_0%,_#4B1A8E_50%,_#3B1A6E_100%)] p-2 sm:p-3 md:p-4 overflow-hidden shadow-xl border border-gold-primary/20 cursor-pointer"
             onClick={navigateToLogin}
           >
             {/* Canvas Sparkles Background Animation */}
