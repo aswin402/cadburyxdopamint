@@ -4,7 +4,7 @@ import { LoginPage } from "./components/LoginPage";
 
 // Import custom assets
 import bannerImage from "./assets/Banner_Image.webp";
-import mobileBannerImage from "./assets/Mobile_Banner_JPEG.webp";
+import mobileBannerImage from "./assets/Mobile Banner_JPEG_2.webp";
 import secretSantaImg from "./assets/Secret_santa.webp";
 import logoCad from "./assets/logocad.svg";
 
