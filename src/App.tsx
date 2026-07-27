@@ -112,6 +112,7 @@ function SparkleCanvas() {
 function App() {
   const [currentPage, setCurrentPage] = useState<"home" | "login" | "meet-santa">("home");
   const [userName, setUserName] = useState<string | null>(null);
+  const [unicode, setUnicode] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileTicketState, setMobileTicketState] = useState(1);
 
@@ -150,6 +151,7 @@ function App() {
     return (
       <MeetSantaPage
         userName={userName}
+        unicode={unicode}
         onEndCall={navigateToHome}
       />
     );
@@ -160,8 +162,9 @@ function App() {
     return (
       <LoginPage
         onBackToHome={navigateToHome}
-        onLoginSuccess={(name) => {
+        onLoginSuccess={(name, code) => {
           setUserName(name);
+          setUnicode(code);
         }}
         onNavigateToMeetSanta={navigateToMeetSanta}
       />

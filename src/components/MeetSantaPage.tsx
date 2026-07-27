@@ -3,10 +3,11 @@ import logoCad from "../assets/logocad.svg";
 
 interface MeetSantaPageProps {
   userName: string | null;
+  unicode: string | null;
   onEndCall: () => void;
 }
 
-export function MeetSantaPage({ userName, onEndCall }: MeetSantaPageProps) {
+export function MeetSantaPage({ userName, unicode, onEndCall }: MeetSantaPageProps) {
   const [callDuration, setCallDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
@@ -15,6 +16,10 @@ export function MeetSantaPage({ userName, onEndCall }: MeetSantaPageProps) {
   const [chatMessage, setChatMessage] = useState("");
   const [chatLog, setChatLog] = useState<Array<{ sender: "user" | "santa"; text: string }>>([]);
   const [showChat, setShowChat] = useState(false);
+  
+  // Modal State for ticket code display on call disconnect
+  const [showUnicodeModal, setShowUnicodeModal] = useState(false);
+  const [copiedModal, setCopiedModal] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -31,26 +36,27 @@ export function MeetSantaPage({ userName, onEndCall }: MeetSantaPageProps) {
     "Ho ho ho! Remember, Christmas magic is all about sharing love and joy!",
   ];
 
-  // Increment call duration
+  // Increment call duration (pause if modal is open)
   useEffect(() => {
+    if (showUnicodeModal) return;
     const timer = setInterval(() => {
       setCallDuration((prev) => prev + 1);
     }, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [showUnicodeModal]);
 
-  // Cycle Santa's auto-dialogues every 6 seconds if chat is empty
+  // Cycle Santa's auto-dialogues every 6 seconds if chat is empty and modal is closed
   useEffect(() => {
-    if (chatLog.length > 0) return; // Stop auto-cycling if they start chatting
+    if (chatLog.length > 0 || showUnicodeModal) return;
     const dialogueTimer = setInterval(() => {
       setSantaDialogueIndex((prev) => (prev + 1) % santaDialogues.length);
     }, 6000);
     return () => clearInterval(dialogueTimer);
-  }, [chatLog.length, santaDialogues.length]);
+  }, [chatLog.length, santaDialogues.length, showUnicodeModal]);
 
   // Request webcam stream on load
   useEffect(() => {
-    if (!isVideoOff) {
+    if (!isVideoOff && !showUnicodeModal) {
       navigator.mediaDevices
         .getUserMedia({ video: { width: 320, height: 240 }, audio: false })
         .then((mediaStream) => {
@@ -74,7 +80,7 @@ export function MeetSantaPage({ userName, onEndCall }: MeetSantaPageProps) {
         stream.getTracks().forEach((track) => track.stop());
       }
     };
-  }, [isVideoOff]);
+  }, [isVideoOff, showUnicodeModal]);
 
   // Auto scroll chat to bottom
   useEffect(() => {
@@ -114,6 +120,18 @@ export function MeetSantaPage({ userName, onEndCall }: MeetSantaPageProps) {
     }, 1500);
   };
 
+  const handleDisconnectClick = () => {
+    // Show the ticket code modal first instead of exiting directly
+    setShowUnicodeModal(true);
+  };
+
+  const handleCopyModal = () => {
+    if (!unicode) return;
+    navigator.clipboard.writeText(unicode);
+    setCopiedModal(true);
+    setTimeout(() => setCopiedModal(false), 2000);
+  };
+
   // Get current subtitle string
   const currentSubtitle =
     santaDialogueIndex === -1 && chatLog.length > 0
@@ -144,7 +162,7 @@ export function MeetSantaPage({ userName, onEndCall }: MeetSantaPageProps) {
             {formatTime(callDuration)}
           </div>
           <button
-            onClick={onEndCall}
+            onClick={handleDisconnectClick}
             className="px-4 py-1.5 bg-red-600 hover:bg-red-700 active:scale-95 transition-all text-xs font-bold rounded-lg border border-red-500/30 shadow-md cursor-pointer"
           >
             End Call
@@ -372,7 +390,7 @@ export function MeetSantaPage({ userName, onEndCall }: MeetSantaPageProps) {
 
         {/* Big End Call Button */}
         <button
-          onClick={onEndCall}
+          onClick={handleDisconnectClick}
           className="flex items-center gap-3 px-8 py-3 bg-red-600 hover:bg-red-700 active:scale-95 transition-all text-white font-bold rounded-full border border-red-500/40 shadow-lg cursor-pointer text-sm sm:text-base"
         >
           <svg className="w-5 h-5 fill-white rotate-[135deg]" viewBox="0 0 24 24">
@@ -381,6 +399,49 @@ export function MeetSantaPage({ userName, onEndCall }: MeetSantaPageProps) {
           Disconnect Call
         </button>
       </footer>
+
+      {/* Unicode Ticket Code Modal Dialog */}
+      {showUnicodeModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-fade-in">
+          <div className="bg-[#2B0E54] border-2 border-gold-primary max-w-md w-full rounded-3xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative text-center flex flex-col items-center">
+            
+            {/* Modal Icon Header */}
+            <div className="w-20 h-20 rounded-full bg-[#1F073E] border-2 border-gold-primary flex items-center justify-center text-4xl mb-4 shadow-lg select-none">
+              🎟️
+            </div>
+
+            <h3 className="text-2xl font-spartan font-bold text-gold-light mb-2">
+              Santa's Gift Ticket!
+            </h3>
+            
+            <p className="text-xs sm:text-sm text-cream-text/90 leading-relaxed mb-6">
+              Thank you for chatting with Santa, <strong className="text-white">{nameToUse}</strong>! 
+              Your unique 12-digit gift ticket code has been reserved. Copy it below to claim your Christmas gift!
+            </p>
+
+            {/* Code Box with Copy Button */}
+            <div className="w-full bg-[#1A0734] border border-gold-primary/30 rounded-xl px-4 py-3.5 flex items-center justify-between mb-8 shadow-inner gap-2">
+              <span className="font-mono text-base sm:text-lg font-bold text-white tracking-wider select-all truncate">
+                {unicode || "aejsn2838snb"}
+              </span>
+              <button
+                onClick={handleCopyModal}
+                className="px-4 py-2 bg-metallic-gold text-[#4b0983] font-bold rounded-lg text-xs hover:scale-105 active:scale-95 transition-all cursor-pointer border border-[#FFE9A0]/40 shadow shrink-0"
+              >
+                {copiedModal ? "Copied! ✓" : "Copy"}
+              </button>
+            </div>
+
+            {/* Close / Return to Home Button */}
+            <button
+              onClick={onEndCall}
+              className="w-full py-3.5 bg-metallic-gold text-[#4b0983] font-bold rounded-xl text-sm border border-[#FFE9A0]/60 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shadow-lg"
+            >
+              Close & Go to Homepage
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

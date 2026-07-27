@@ -5,16 +5,13 @@ import cad2Img from "../assets/cad2.webp";
 
 interface LoginPageProps {
   onBackToHome: () => void;
-  onLoginSuccess?: (name: string) => void;
+  onLoginSuccess?: (name: string, code: string) => void;
   onNavigateToMeetSanta: () => void;
 }
 
 export function LoginPage({ onBackToHome, onLoginSuccess, onNavigateToMeetSanta }: LoginPageProps) {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
-  const [submittedName, setSubmittedName] = useState<string | null>(null);
-  const [unicode, setUnicode] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,18 +24,10 @@ export function LoginPage({ onBackToHome, onLoginSuccess, onNavigateToMeetSanta 
       code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     
-    setUnicode(code);
-    setSubmittedName(firstName.trim());
     if (onLoginSuccess) {
-      onLoginSuccess(firstName.trim());
+      onLoginSuccess(firstName.trim(), code);
     }
-  };
-
-  const handleCopy = () => {
-    if (!unicode) return;
-    navigator.clipboard.writeText(unicode);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    onNavigateToMeetSanta();
   };
 
   return (
@@ -88,92 +77,57 @@ export function LoginPage({ onBackToHome, onLoginSuccess, onNavigateToMeetSanta 
               Step into the grotto
             </h2>
             <p className="text-cream-text/70 text-xs sm:text-sm">
-              Just a name, and you're through the door.
+              Just a name and email, and you're through the door.
             </p>
           </div>
 
-          {submittedName ? (
-            /* Welcome / Success State */
-            <div className="text-center py-4 animate-fade-in flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full bg-green-check/20 border-2 border-green-check flex items-center justify-center text-green-check mb-4">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-spartan font-bold text-gold-light mb-2">
-                Welcome, {submittedName}! 🎅
-              </h3>
-              <p className="text-xs sm:text-sm text-cream-text/85 mb-4">
-                Your unique 12-digit ticket code has been generated:
-              </p>
+          {/* Login Form */}
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div className="flex flex-col gap-1.5 text-left">
+              <label className="text-xs sm:text-sm font-medium text-cream-text/90">
+                Your first name
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="e.g. Priya"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="bg-[#1A0734] border border-purple-light/40 focus:border-gold-primary text-white text-sm rounded-xl px-4 py-3.5 outline-none transition-colors placeholder:text-cream-text/30"
+              />
+            </div>
 
-              {/* Unicode Box with Copy Button */}
-              <div className="w-full bg-[#1A0734] border border-gold-primary/30 rounded-xl px-4 py-3.5 flex items-center justify-between mb-6 shadow-inner gap-2">
-                <span className="font-mono text-base sm:text-lg font-bold text-white tracking-wider select-all truncate">{unicode}</span>
-                <button
-                  onClick={handleCopy}
-                  className="px-3.5 py-2 bg-metallic-gold text-[#4b0983] font-bold rounded-lg text-xs hover:scale-105 active:scale-95 transition-all cursor-pointer border border-[#FFE9A0]/40 shadow-md shrink-0"
-                >
-                  {copied ? "Copied! ✓" : "Copy"}
-                </button>
-              </div>
+            <div className="flex flex-col gap-1.5 text-left">
+              <label className="text-xs sm:text-sm font-medium text-cream-text/90">
+                Email
+              </label>
+              <input
+                type="email"
+                required
+                placeholder="e.g. priya@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-[#1A0734] border border-purple-light/40 focus:border-gold-primary text-white text-sm rounded-xl px-4 py-3.5 outline-none transition-colors placeholder:text-cream-text/30"
+              />
+            </div>
 
+            {firstName.trim() && email.trim() ? (
               <button
-                onClick={onNavigateToMeetSanta}
-                className="w-full py-3.5 sm:py-4 bg-metallic-gold text-[#4b0983] font-bold rounded-xl text-sm sm:text-base border border-[#FFE9A0]/60 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shadow-lg animate-pulse"
+                type="submit"
+                className="w-full py-3.5 sm:py-4 bg-metallic-gold text-[#4b0983] font-bold rounded-xl text-sm sm:text-base border border-[#FFE9A0]/60 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shadow-lg mt-2 animate-fade-in"
               >
                 Ho ho — let's talk
               </button>
-            </div>
-          ) : (
-            /* Login Form */
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1.5 text-left">
-                <label className="text-xs sm:text-sm font-medium text-cream-text/90">
-                  Your first name
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Priya"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  className="bg-[#1A0734] border border-purple-light/40 focus:border-gold-primary text-white text-sm rounded-xl px-4 py-3.5 outline-none transition-colors placeholder:text-cream-text/30"
-                />
+            ) : (
+              <div className="h-14 sm:h-16 flex items-center justify-center text-xs text-cream-text/40 italic">
+                Fill in your name and email to proceed
               </div>
+            )}
 
-              <div className="flex flex-col gap-1.5 text-left">
-                <label className="text-xs sm:text-sm font-medium text-cream-text/90">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  required
-                  placeholder="e.g. priya@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-[#1A0734] border border-purple-light/40 focus:border-gold-primary text-white text-sm rounded-xl px-4 py-3.5 outline-none transition-colors placeholder:text-cream-text/30"
-                />
-              </div>
-
-              {firstName.trim() && email.trim() ? (
-                <button
-                  type="submit"
-                  className="w-full py-3.5 sm:py-4 bg-metallic-gold text-[#4b0983] font-bold rounded-xl text-sm sm:text-base border border-[#FFE9A0]/60 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shadow-lg mt-2 animate-fade-in"
-                >
-                  Generate Ticket
-                </button>
-              ) : (
-                <div className="h-14 sm:h-16 flex items-center justify-center text-xs text-cream-text/40 italic">
-                  Fill in your name and email to proceed
-                </div>
-              )}
-
-              <p className="text-[11px] sm:text-xs text-cream-text/60 text-center leading-relaxed mt-2">
-                This is a demo sign-in — your name is only used to personalise your conversation with Santa in your browser. Nothing is saved or sent anywhere else.
-              </p>
-            </form>
-          )}
+            <p className="text-[11px] sm:text-xs text-cream-text/60 text-center leading-relaxed mt-2">
+              This is a demo sign-in — your name is only used to personalise your conversation with Santa in your browser. Nothing is saved or sent anywhere else.
+            </p>
+          </form>
         </div>
       </main>
 
