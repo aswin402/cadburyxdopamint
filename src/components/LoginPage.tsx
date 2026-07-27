@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logoCad from "../assets/logocad.svg";
-import cad1Img from "../assets/cad1.png";
-import cad2Img from "../assets/cad2.png";
+import cad1Img from "../assets/cad1.webp";
+import cad2Img from "../assets/cad2.webp";
 
 interface LoginPageProps {
   onBackToHome: () => void;

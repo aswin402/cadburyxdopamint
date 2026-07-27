@@ -3,24 +3,24 @@ import { Menu, X, Check } from "lucide-react";
 import { LoginPage } from "./components/LoginPage";
 
 // Import custom assets
-import bannerImage from "./assets/Banner_Image.png";
-import mobileBannerImage from "./assets/Mobile_Banner_JPEG.jpg";
-import secretSantaImg from "./assets/Secret_santa.png";
+import bannerImage from "./assets/Banner_Image.webp";
+import mobileBannerImage from "./assets/Mobile_Banner_JPEG.webp";
+import secretSantaImg from "./assets/Secret_santa.webp";
 import logoCad from "./assets/logocad.svg";
 
 // Prize Ticket custom assets
-import ticket1Img from "./assets/Ticket_1_L.png";
-import ticket2Img from "./assets/Ticket_2_L.png";
-import aboveFooterImg from "./assets/above_Footer_Image.jpg.jpeg";
-import mobileScreenImg from "./assets/Mobile_Screen.png";
+import ticket1Img from "./assets/Ticket_1_L.webp";
+import ticket2Img from "./assets/Ticket_2_L.webp";
+import aboveFooterImg from "./assets/above_Footer_Image.jpg.webp";
+import mobileScreenImg from "./assets/Mobile_Screen.webp";
 
 // Roadmap Step assets
-import keyImg from "./assets/key.png";
-import chatImg from "./assets/chat.png";
-import codeImg from "./assets/code.png";
-import santaRidingImg from "./assets/santa_riding.png";
-import chiminiImg from "./assets/chimini.png";
-import giftImg from "./assets/gift.png";
+import keyImg from "./assets/key.webp";
+import chatImg from "./assets/chat.webp";
+import codeImg from "./assets/code.webp";
+import santaRidingImg from "./assets/santa_riding.webp";
+import chiminiImg from "./assets/chimini.webp";
+import giftImg from "./assets/gift.webp";
 
 // Hook for scroll animation reveal
 function useIntersectionObserver() {
