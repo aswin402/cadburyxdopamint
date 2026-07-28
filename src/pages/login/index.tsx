@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import logoCad from "../assets/logocad.svg";
-import cad1Img from "../assets/cad1.webp";
-import cad2Img from "../assets/cad2.webp";
+import logoCad from "../../assets/logocad.svg";
+import cad1Img from "../../assets/cad1.webp";
+import cad2Img from "../../assets/cad2.webp";
 
 interface LoginPageProps {
   onBackToHome: () => void;
@@ -9,7 +9,7 @@ interface LoginPageProps {
   onNavigateToMeetSanta: () => void;
 }
 
-export function LoginPage({ onBackToHome, onLoginSuccess, onNavigateToMeetSanta }: LoginPageProps) {
+export default function LoginPage({ onBackToHome, onLoginSuccess, onNavigateToMeetSanta }: LoginPageProps) {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
 
@@ -39,7 +39,7 @@ export function LoginPage({ onBackToHome, onLoginSuccess, onNavigateToMeetSanta 
       <header className="relative z-20 w-full py-6 px-4 md:px-8 flex items-center justify-between container mx-auto">
         <button
           onClick={onBackToHome}
-          className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer border-none bg-transparent"
         >
           <img src={logoCad} alt="Cadbury Logo" className="h-10 md:h-12 w-auto object-contain select-none" />
         </button>

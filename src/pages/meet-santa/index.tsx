@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import logoCad from "../assets/logocad.svg";
+import logoCad from "../../assets/logocad.svg";
 
 interface MeetSantaPageProps {
   userName: string | null;
@@ -7,7 +7,7 @@ interface MeetSantaPageProps {
   onEndCall: () => void;
 }
 
-export function MeetSantaPage({ userName, unicode, onEndCall }: MeetSantaPageProps) {
+export default function MeetSantaPage({ userName, unicode, onEndCall }: MeetSantaPageProps) {
   const [callDuration, setCallDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
