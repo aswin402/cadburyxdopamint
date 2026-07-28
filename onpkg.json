@@ -46,16 +46,16 @@
     ],
     "files": [
       "README.md",
-      "design.md",
-      "implementation-plan.md",
+      "onpkg_docs/design.md",
+      "onpkg_docs/implementation-plan.md",
       "index.html",
       "package.json",
-      "prd.md",
+      "onpkg_docs/prd.md",
       "src/App.tsx",
       "src/index.css",
       "src/main.tsx",
       "src/vite-env.d.ts",
-      "todo.md",
+      "onpkg_docs/todo.md",
       "tsconfig.json",
       "vite.config.ts"
     ]
