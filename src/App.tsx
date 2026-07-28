@@ -266,7 +266,7 @@ function App() {
         <div className="container max-w-6xl mx-auto px-4 md:px-8">
           {/* Section Header */}
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-[#2B0E54] tracking-wide">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-spartan font-bold text-[#2B0E54] tracking-wide">
               Your Christmas Adventure Starts Here
             </h2>
           </div>
