@@ -274,7 +274,7 @@ function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
             <div className="lg:col-span-7 flex flex-col justify-center items-center w-full">
-              <div className="relative flex flex-col gap-8 sm:gap-12 lg:gap-0 w-full max-w-xl h-auto lg:h-[680px] lg:justify-between">
+              <div className="relative flex flex-col gap-8 sm:gap-12 lg:gap-0 w-full max-w-xl h-auto lg:h-[650px] lg:justify-between">
               {/* SVG Winding Dashed Road Path - Exactly matching badge column */}
               <div className="absolute left-0 top-10 bottom-10 w-20 sm:w-28 pointer-events-none z-0">
                 <svg className="w-full h-full" viewBox="0 0 100 800" fill="none" preserveAspectRatio="none">
@@ -402,7 +402,7 @@ function App() {
             <img
               src={mobileScreenImg}
               alt="Secret Santa Mobile Chat Experience"
-              className="w-full max-w-[92%] sm:max-w-[450px] lg:max-w-none h-auto lg:h-[680px] lg:w-auto object-contain drop-shadow-2xl select-none pointer-events-none hover:scale-[1.02] transition-transform duration-500"
+              className="w-full max-w-[92%] sm:max-w-[450px] lg:max-w-none h-auto lg:h-[730px] lg:w-auto object-contain drop-shadow-2xl select-none pointer-events-none hover:scale-[1.02] transition-transform duration-500"
               loading="lazy"
             />
           </div>
