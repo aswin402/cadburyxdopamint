@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
 import bannerImage from "../../../assets/Banner_Image.webp";
 import mobileBannerImage from "../../../assets/Mobile Banner_JPEG_2.webp";
 import secretSantaImg from "../../../assets/Secret_santa.webp";
+import { hasSantaSession, SANTA_AVATAR_UUID } from "../../../config/companion";
 
-interface HeroSectionProps {
-  onNavigateToLogin: () => void;
-}
+export default function HeroSection() {
+  const santaHref = hasSantaSession()
+    ? `/companions/${encodeURIComponent(SANTA_AVATAR_UUID)}?santa=1`
+    : "/companions";
 
-export default function HeroSection({ onNavigateToLogin }: HeroSectionProps) {
   return (
     <section className="relative w-full overflow-hidden bg-transparent aspect-[1080/2218] md:aspect-[1920/1338]">
       {/* Desktop Banner Image (Visible on md screens and up) */}
@@ -54,13 +56,19 @@ export default function HeroSection({ onNavigateToLogin }: HeroSectionProps) {
             </p>
 
             {/* Single Primary Action Button with Metallic Gold Gradient */}
-            <div className="flex flex-col items-start gap-3 w-full sm:w-auto">
-              <button
-                onClick={onNavigateToLogin}
+            <div className="flex flex-col sm:flex-row items-start gap-3 w-full sm:w-auto">
+              <Link
+                to={santaHref}
                 className="px-5 py-3 sm:px-6 sm:py-3.5 bg-metallic-gold text-[#4b0983] font-bold rounded-xl text-xs sm:text-sm md:text-base border border-[#FFE9A0]/60 hover:scale-[1.03] active:scale-[0.98] transition-all cursor-pointer shadow-md"
               >
                 Santa's Waiting for You
-              </button>
+              </Link>
+              <Link
+                to="/companions"
+                className="px-5 py-3 sm:px-6 sm:py-3.5 bg-transparent text-cream-text font-bold rounded-xl text-xs sm:text-sm md:text-base border border-cream-text/40 hover:border-gold-light hover:text-gold-light hover:scale-[1.03] active:scale-[0.98] transition-all cursor-pointer shadow-md"
+              >
+                AI Companions (widget)
+              </Link>
             </div>
           </div>
 

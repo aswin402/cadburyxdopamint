@@ -1,56 +1,34 @@
-import { useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/homepage";
 import LoginPage from "./pages/login";
 import MeetSantaPage from "./pages/meet-santa";
+import CompanionPickerPage from "./pages/companion/PickerPage";
+import CompanionChatPage from "./pages/companion/ChatPage";
+import CompanionLauncher from "./components/companion/CompanionLauncher";
+import ScrollToTop from "./components/ScrollToTop";
+
+function HomeLayout() {
+  return (
+    <>
+      <Homepage />
+      <CompanionLauncher companionId="serena" />
+    </>
+  );
+}
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<"home" | "login" | "meet-santa">("home");
-  const [userName, setUserName] = useState<string | null>(null);
-  const [unicode, setUnicode] = useState<string | null>(null);
-
-  const navigateToHome = () => {
-    setCurrentPage("home");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const navigateToLogin = () => {
-    setCurrentPage("login");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const navigateToMeetSanta = () => {
-    setCurrentPage("meet-santa");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  if (currentPage === "meet-santa") {
-    return (
-      <MeetSantaPage
-        userName={userName}
-        unicode={unicode}
-        onEndCall={navigateToHome}
-      />
-    );
-  }
-
-  if (currentPage === "login") {
-    return (
-      <LoginPage
-        onBackToHome={navigateToHome}
-        onLoginSuccess={(name, code) => {
-          setUserName(name);
-          setUnicode(code);
-        }}
-        onNavigateToMeetSanta={navigateToMeetSanta}
-      />
-    );
-  }
-
   return (
-    <Homepage
-      onNavigateToLogin={navigateToLogin}
-      onNavigateToHome={navigateToHome}
-    />
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomeLayout />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/meet-santa" element={<MeetSantaPage />} />
+        <Route path="/companions" element={<CompanionPickerPage />} />
+        <Route path="/companions/:companionId" element={<CompanionChatPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   );
 }
 

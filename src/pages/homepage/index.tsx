@@ -5,23 +5,18 @@ import ExperienceSection from "./sections/ExperienceSection";
 import PrizeTicketSection from "./sections/PrizeTicketSection";
 import aboveFooterImg from "../../assets/above_Footer_Image.jpg.webp";
 
-interface HomepageProps {
-  onNavigateToLogin: () => void;
-  onNavigateToHome: () => void;
-}
-
-export default function Homepage({ onNavigateToLogin, onNavigateToHome }: HomepageProps) {
+export default function Homepage() {
   return (
     <div className="min-h-screen bg-[#4b0983] text-cream-text font-sans selection:bg-gold-primary selection:text-[#4b0983] overflow-x-hidden">
-      <Header onNavigateToHome={onNavigateToHome} />
+      <Header />
 
       <main>
-        <HeroSection onNavigateToLogin={onNavigateToLogin} />
-        
+        <HeroSection />
+
         <ExperienceSection />
-        
-        <PrizeTicketSection onNavigateToLogin={onNavigateToLogin} />
-        
+
+        <PrizeTicketSection />
+
         {/* Above Footer Image Banner */}
         <section className="w-full bg-cream-bg leading-[0] overflow-hidden">
           <img
@@ -35,7 +30,7 @@ export default function Homepage({ onNavigateToLogin, onNavigateToHome }: Homepa
         </section>
       </main>
 
-      <Footer onNavigateToHome={onNavigateToHome} />
+      <Footer />
     </div>
   );
 }

@@ -1,13 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import logoCad from "../../assets/logocad.svg";
 
-interface MeetSantaPageProps {
-  userName: string | null;
-  unicode: string | null;
-  onEndCall: () => void;
-}
+type MeetSantaLocationState = {
+  userName?: string | null;
+  unicode?: string | null;
+};
 
-export default function MeetSantaPage({ userName, unicode, onEndCall }: MeetSantaPageProps) {
+export default function MeetSantaPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const state = (location.state as MeetSantaLocationState | null) || {};
+  const userName = state.userName ?? null;
+  const unicode = state.unicode ?? null;
+  const onEndCall = () => navigate("/");
   const [callDuration, setCallDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);

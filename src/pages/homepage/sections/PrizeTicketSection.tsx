@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SparkleCanvas from "../../../components/SparkleCanvas";
 import ticket1Img from "../../../assets/Ticket_1_L.webp";
 import ticket2Img from "../../../assets/Ticket_2_L.webp";
 
-interface PrizeTicketSectionProps {
-  onNavigateToLogin: () => void;
-}
-
-export default function PrizeTicketSection({ onNavigateToLogin }: PrizeTicketSectionProps) {
+export default function PrizeTicketSection() {
+  const navigate = useNavigate();
   const [mobileTicketState, setMobileTicketState] = useState(1);
 
   useEffect(() => {
@@ -22,7 +20,7 @@ export default function PrizeTicketSection({ onNavigateToLogin }: PrizeTicketSec
       <div className="container mx-auto px-4 md:px-8">
         <div
           className="relative rounded-2xl bg-[linear-gradient(135deg,_#2D1060_0%,_#4B1A8E_50%,_#3B1A6E_100%)] p-2 sm:p-3 md:p-4 overflow-hidden shadow-xl border border-gold-primary/20 cursor-pointer"
-          onClick={onNavigateToLogin}
+          onClick={() => navigate("/login")}
         >
           {/* Canvas Sparkles Background Animation */}
           <SparkleCanvas />
