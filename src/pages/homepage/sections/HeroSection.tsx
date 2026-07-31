@@ -52,7 +52,9 @@ export default function HeroSection() {
 
             {/* Concise 3-Sentence Description Paragraph */}
             <p className="text-xs sm:text-sm md:text-base text-cream-text/95 leading-relaxed mb-4 sm:mb-5 md:mb-7 max-w-md drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
-              This Christmas, don't just write to Santa, talk to him. Share your wishes and hear Santa reply in his warm, real-time voice. Better yet, he'll remember your name and continue the conversation.
+              This Christmas, don't just write to Santa, talk to him. Share your
+              wishes and hear Santa reply in his warm, real-time voice. Better
+              yet, he'll remember your name and continue the conversation.
             </p>
 
             {/* Single Primary Action Button with Metallic Gold Gradient */}
@@ -63,12 +65,12 @@ export default function HeroSection() {
               >
                 Santa's Waiting for You
               </Link>
-              <Link
+              {/* <Link
                 to="/companions"
                 className="px-5 py-3 sm:px-6 sm:py-3.5 bg-transparent text-cream-text font-bold rounded-xl text-xs sm:text-sm md:text-base border border-cream-text/40 hover:border-gold-light hover:text-gold-light hover:scale-[1.03] active:scale-[0.98] transition-all cursor-pointer shadow-md"
               >
                 AI Companions (widget)
-              </Link>
+              </Link> */}
             </div>
           </div>
 
