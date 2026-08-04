@@ -11,7 +11,7 @@ function HomeLayout() {
   return (
     <>
       <Homepage />
-      <CompanionLauncher companionId="serena" />
+      <CompanionLauncher />
     </>
   );
 }

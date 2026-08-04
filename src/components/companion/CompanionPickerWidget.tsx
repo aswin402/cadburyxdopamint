@@ -93,7 +93,7 @@ export default function CompanionPickerWidget({
       {status === 'blocked' || status === 'error' ? (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[#15042A]/95 px-6 text-center">
           <p className="text-sm text-cream-text/80 max-w-md leading-relaxed">
-            Picker widget did not load. Run Dopamint on port 3001, then retry.
+            Picker widget did not load. Run Dopamint on port 5040, then retry.
           </p>
           <button
             type="button"

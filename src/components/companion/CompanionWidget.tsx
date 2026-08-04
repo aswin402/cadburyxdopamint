@@ -1,8 +1,8 @@
 /**
- * CompanionWidget — loads Dopamint chat **inside** Cadbury (iframe).
+ * CompanionWidget — loads Dopamint chat inside a host page (iframe).
  *
- * Local: iframe → http://localhost:3001 (ai_companion; Cadbury on :5173).
- * Companion must allow Cadbury in CSP frame-ancestors (see ai_companion .env.local).
+ * Host stays lightweight: iframe + postMessage only.
+ * Companion must allow this host in CSP frame-ancestors.
  *
  * postMessage (from iframe):
  *   { type: 'dopamint:ready' }
@@ -13,10 +13,8 @@
  *   { type: 'dopamint:loggedOut' }
  *
  * postMessage (to iframe):
+ *   { type: 'dopamint:focusConnect' }
  *   { type: 'dopamint:logout' }
- *
- * Sign-in is not proxied through the iframe: Google OAuth cannot complete in a
- * third-party frame, so connect() opens a top-level Dopamint window instead.
  */
 
 import {
@@ -33,19 +31,19 @@ import {
   COMPANION_ORIGIN,
   WIDGET_DEFAULTS,
   buildCompanionEmbedSrc,
-  buildCompanionSignInUrl,
   getCompanionEmbedOrigin,
   type CompanionId,
   type EmbedMode,
 } from '../../config/companion';
+import {
+  exitAppFullscreen,
+  requestAppFullscreen,
+} from '../../lib/fullscreen';
 
 type WidgetStatus = 'loading' | 'ready' | 'blocked' | 'error';
 
-const SIGN_IN_POPUP_FEATURES =
-  'width=460,height=700,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes';
-
 export interface CompanionWidgetHandle {
-  /** Open top-level Dopamint Google sign-in (OAuth cannot finish in iframe). */
+  /** Focus the Connect Wallet control inside the Dopamint iframe. */
   connect: () => void;
   /** Ask the Dopamint iframe to disconnect wallet + clear session. */
   disconnect: () => void;
@@ -58,10 +56,17 @@ interface CompanionWidgetProps {
   onClose?: () => void;
   onAuthChange?: (authenticated: boolean) => void;
   onLoggedOut?: () => void;
+  /** Fired when chat ends inside the iframe (End Chat). */
+  onSessionEnded?: (info: { durationSeconds: number; companionId?: string }) => void;
   variant?: 'panel' | 'card';
-  /** Santa — pass VITE_SANTA_USER_ID JWT; no wallet Connect. */
-  santa?: boolean;
+  /** Widget theme: `light` | `dark` | `cadbury`. */
+  theme?: string;
+  /** Host id on the embed URL (`?host=`). */
+  host?: string;
+  /** Embed JWT — silent auth, no wallet Connect. */
   userToken?: string;
+  /** Edge-to-edge immersive iframe. */
+  maximized?: boolean;
 }
 
 const CompanionWidget = forwardRef<CompanionWidgetHandle, CompanionWidgetProps>(
@@ -73,9 +78,12 @@ const CompanionWidget = forwardRef<CompanionWidgetHandle, CompanionWidgetProps>(
       onClose,
       onAuthChange,
       onLoggedOut,
+      onSessionEnded,
       variant = 'panel',
-      santa = false,
+      theme = 'cadbury',
+      host = 'host',
       userToken,
+      maximized = false,
     },
     ref,
   ) {
@@ -84,23 +92,23 @@ const CompanionWidget = forwardRef<CompanionWidgetHandle, CompanionWidgetProps>(
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const blockTimer = useRef<number | null>(null);
 
+    const embedOpts = useMemo(
+      () => ({
+        theme,
+        host,
+        userToken,
+        maximized,
+      }),
+      [theme, host, userToken, maximized],
+    );
+
     const embedSrc = useMemo(
-      () =>
-        buildCompanionEmbedSrc(companionId, {
-          theme: 'cadbury',
-          santa,
-          userToken,
-        }),
-      [companionId, santa, userToken],
+      () => buildCompanionEmbedSrc(companionId, embedOpts),
+      [companionId, embedOpts],
     );
     const directUrl = useMemo(
-      () =>
-        buildCompanionEmbedSrc(companionId, {
-          theme: 'cadbury',
-          santa,
-          userToken,
-        }),
-      [companionId, santa, userToken],
+      () => buildCompanionEmbedSrc(companionId, embedOpts),
+      [companionId, embedOpts],
     );
 
     const postToIframe = useCallback((type: string) => {
@@ -110,17 +118,9 @@ const CompanionWidget = forwardRef<CompanionWidgetHandle, CompanionWidgetProps>(
     }, []);
 
     const connect = useCallback(() => {
-      // Sign-in must run top-level on the Dopamint origin — the OAuth flow cannot
-      // finish inside this iframe. Opened from the header click so it isn't blocked.
-      const win = window.open(
-        buildCompanionSignInUrl(),
-        'dopamint-signin',
-        SIGN_IN_POPUP_FEATURES,
-      );
-      if (!win) {
-        window.alert('Allow pop-ups for this site to sign in to Dopamint.');
-      }
-    }, []);
+      postToIframe('dopamint:focusConnect');
+      iframeRef.current?.focus();
+    }, [postToIframe]);
 
     const disconnect = useCallback(() => {
       postToIframe('dopamint:logout');
@@ -193,11 +193,25 @@ const CompanionWidget = forwardRef<CompanionWidgetHandle, CompanionWidgetProps>(
         ) {
           iframeRef.current.style.height = `${Math.max(320, data.height)}px`;
         }
+        if (type === 'dopamint:exitFullscreen') {
+          void exitAppFullscreen();
+        }
+        if (type === 'dopamint:requestFullscreen') {
+          void requestAppFullscreen();
+        }
         if (type === 'dopamint:close' || type === 'close') {
-          onClose?.();
+          void exitAppFullscreen().finally(() => onClose?.());
         }
         if (type === 'dopamint:back' || type === 'back') {
-          onClose?.();
+          void exitAppFullscreen().finally(() => onClose?.());
+        }
+        if (type === 'dopamint:sessionEnded' || type === 'sessionEnded') {
+          const durationSeconds = Number(data.durationSeconds) || 0;
+          onSessionEnded?.({
+            durationSeconds,
+            companionId:
+              typeof data.companionId === 'string' ? data.companionId : undefined,
+          });
         }
         if (type === 'dopamint:loggedIn' || type === 'loggedIn') {
           onAuthChange?.(true);
@@ -210,12 +224,14 @@ const CompanionWidget = forwardRef<CompanionWidgetHandle, CompanionWidgetProps>(
 
       window.addEventListener('message', onMessage);
       return () => window.removeEventListener('message', onMessage);
-    }, [onAuthChange, onClose, onLoggedOut]);
+    }, [onAuthChange, onClose, onLoggedOut, onSessionEnded]);
 
     const shell =
-      variant === 'card'
-        ? 'rounded-3xl border border-white/10 bg-[#1A0734] shadow-2xl overflow-hidden'
-        : 'rounded-3xl border border-white/10 bg-[#15042A] overflow-hidden';
+      maximized
+        ? 'overflow-hidden bg-black'
+        : variant === 'card'
+          ? 'rounded-3xl border border-white/10 bg-[#1A0734] shadow-2xl overflow-hidden'
+          : 'rounded-3xl border border-white/10 bg-[#15042A] overflow-hidden';
 
     if (usePopupUi) {
       return (
@@ -256,7 +272,9 @@ const CompanionWidget = forwardRef<CompanionWidgetHandle, CompanionWidgetProps>(
 
     return (
       <div
-        className={`${shell} ${className} relative min-h-[560px] flex flex-col overflow-hidden`}
+        className={`${shell} relative flex flex-col ${
+          maximized ? 'h-[100dvh] w-full' : 'min-h-[560px]'
+        } ${className}`}
       >
         {status === 'loading' && (
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-[#15042A] px-6 text-center pointer-events-none">
@@ -272,7 +290,7 @@ const CompanionWidget = forwardRef<CompanionWidgetHandle, CompanionWidgetProps>(
               <code className="text-gold-light">
                 cd ai_companion/frontend && npm run dev
               </code>{' '}
-              (port 3001), then retry — or use popup.
+              (port 5040), then retry — or use popup.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <button
@@ -303,7 +321,11 @@ const CompanionWidget = forwardRef<CompanionWidgetHandle, CompanionWidgetProps>(
           key={embedSrc}
           title={`Dopamint companion — ${companionId}`}
           src={embedSrc}
-          className="w-full flex-1 min-h-[560px] border-0 bg-[#111827]"
+          className={
+            maximized
+              ? 'h-full w-full flex-1 min-h-0 border-0 bg-black'
+              : 'w-full flex-1 min-h-[560px] border-0 bg-[#111827]'
+          }
           allow="microphone; camera; fullscreen; clipboard-read; clipboard-write"
           allowFullScreen
           referrerPolicy="strict-origin-when-cross-origin"
