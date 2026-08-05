@@ -18,7 +18,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#4b0983] md:aspect-[1920/1338]">
+    <section className="relative w-full overflow-hidden bg-[#4b0983] aspect-[1080/2218] md:aspect-[1920/1338]">
       {/* Cover art — section height follows content so CTA stays visible when narrow (e.g. DevTools). */}
       <img
         src={bannerImage}
@@ -41,7 +41,7 @@ export default function HeroSection() {
         loading="eager"
       />
 
-      <div className="relative z-10 flex min-h-[min(100svh,52rem)] items-start pt-24 pb-10 sm:pt-28 sm:pb-12 md:absolute md:inset-0 md:min-h-0 md:flex md:items-start md:pt-[10%] md:pb-0 lg:min-h-0 lg:pt-[12%] lg:pb-0">
+      <div className="absolute inset-0 z-10 flex items-start pt-24 pb-10 sm:pt-28 sm:pb-12 md:min-h-0 md:pt-[10%] md:pb-0 lg:min-h-0 lg:pt-[12%] lg:pb-0">
         <div className="container mx-auto grid grid-cols-1 items-start gap-6 px-4 md:px-8 lg:grid-cols-12 lg:px-12">
           <div className="flex flex-col items-start lg:col-span-5 xl:col-span-5">
             <img
